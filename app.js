@@ -1,232 +1,56 @@
 'use strict';
 
+/////////    START REMOVING !!!!
+/////////    START REMOVING !!!!
 // Objects declarations
-
-var seattleStore = {
-  location:'Seattle',
-  minDailyCustomer:23,
-  maxDailyCustomer:65,
-  avgCookieSale:6.3,
-  soldCookiesPerDay:0,
-  dailyNumCustomers:0,
+// var seattleStore = {
+//   location:'Seattle',
+//   minDailyCustomer:23,
+//   maxDailyCustomer:65,
+//   avgCookieSale:6.3,
+//   soldCookiesPerDay:0,
+//   dailyNumCustomers:0,
   
-  /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
-  hourlySales:[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]],
+//   /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
+//   hourlySales:[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]],
 
 
-  addSale : function(hourSale){
-    var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
+//   addSale : function(hourSale){
+//     var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
 
-      randomNumber = generateRandomNumber;   
-      // obtain the random amounts of clients and cookies sold.
-      randomNumber.minValue=this.minDailyCustomer;
-      randomNumber.maxValue=this.maxDailyCustomer;
-      numClients=randomNumber.getNumber();
+//       randomNumber = generateRandomNumber;   
+//       // obtain the random amounts of clients and cookies sold.
+//       randomNumber.minValue=this.minDailyCustomer;
+//       randomNumber.maxValue=this.maxDailyCustomer;
+//       numClients=randomNumber.getNumber();
 
-      // obtain the amount of cookies sold per customer
-      randomNumber.minValue=1;
-      randomNumber.maxValue=this.avgCookieSale;
-      numCookies=randomNumber.getNumber(); 
+//       // obtain the amount of cookies sold per customer
+//       randomNumber.minValue=1;
+//       randomNumber.maxValue=this.avgCookieSale;
+//       numCookies=randomNumber.getNumber(); 
      
-      // multiply the ramdom amount of cookies, for the random amount of customers, to know the real amount of sold cookies
-      totalNumCookiesPerSale = numClients * numCookies;
+//       // multiply the ramdom amount of cookies, for the random amount of customers, to know the real amount of sold cookies
+//       totalNumCookiesPerSale = numClients * numCookies;
      
-      // update the value of hourlySales[column1] where the  hours is the indicated
-      for (var i=0; i<this.hourlySales.length;i++)
-      {
-        if (this.hourlySales[i][0] === hourSale)
-        { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
-          this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
-          this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
-        }
-      }
-      // add the sales and customers, to the global STORE sales
-     this.soldCookiesPerDay = this.soldCookiesPerDay + totalNumCookiesPerSale;  //numCookies;
-     this.dailyNumCustomers = this.dailyNumCustomers + numClients;
-     // Update global CORPORATE sales
-     corporate.addSale(this.location,totalNumCookiesPerSale,numClients);
-   }  // addSale
-}  //seattleStore
+//       // update the value of hourlySales[column1] where the  hours is the indicated
+//       for (var i=0; i<this.hourlySales.length;i++)
+//       {
+//         if (this.hourlySales[i][0] === hourSale)
+//         { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
+//           this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
+//           this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
+//         }
+//       }
+//       // add the sales and customers, to the global STORE sales
+//      this.soldCookiesPerDay = this.soldCookiesPerDay + totalNumCookiesPerSale;  //numCookies;
+//      this.dailyNumCustomers = this.dailyNumCustomers + numClients;
+//      // Update global CORPORATE sales
+//      corporate.addSale(this.location,totalNumCookiesPerSale,numClients);
+//    }  // addSale
+// }  //seattleStore
 
+/////////    END REMOVING !!!!
 
-var tokioStore = {
-  location:'Tokio',
-  minDailyCustomer:3,
-  maxDailyCustomer:24,
-  avgCookieSale:1.2,
-  soldCookiesPerDay:0,
-  dailyNumCustomers:0,
-  /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
-  hourlySales:[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]],
-
-  addSale : function(hourSale){
-    var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
-   
-      randomNumber = generateRandomNumber;   
-      // obtain the random amounts of clients and cookies sold.
-      randomNumber.minValue=this.minDailyCustomer;
-      randomNumber.maxValue=this.maxDailyCustomer;
-      numClients=randomNumber.getNumber();
-
-      // obtain the amount of cookies sold per customer
-      randomNumber.minValue=1;
-      randomNumber.maxValue=this.avgCookieSale;
-      numCookies=randomNumber.getNumber(); 
-     
-      // multiply the ramdom amount of cookies, for the random amount of customers, to know the real amount of sold cookies
-      totalNumCookiesPerSale = numClients * numCookies;
-     
-      // update the value of hourlySales[column1] where the  hours is the indicated
-      for (var i=0; i<this.hourlySales.length;i++)
-      {
-        if (this.hourlySales[i][0] === hourSale)
-        { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
-          this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
-          this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
-        }
-      }
-      // add the sales and customers, to the global STORE sales
-     this.soldCookiesPerDay = this.soldCookiesPerDay + totalNumCookiesPerSale;  //numCookies;
-     this.dailyNumCustomers = this.dailyNumCustomers + numClients;
-     // Update global CORPORATE sales
-     corporate.addSale(this.location,totalNumCookiesPerSale,numClients);
-   }  // addSale
-}  //tokyoStore
-
-
-var dubaiStore = {
-  location:'Dubai',
-  minDailyCustomer:11,
-  maxDailyCustomer:38,
-  avgCookieSale:3.7,
-  soldCookiesPerDay:0,
-  dailyNumCustomers:0,
-  /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
-  hourlySales:[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]],
-
-  addSale : function(hourSale){
-    var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
-   
-      randomNumber = generateRandomNumber;   
-      // obtain the random amounts of clients and cookies sold.
-      randomNumber.minValue=this.minDailyCustomer;
-      randomNumber.maxValue=this.maxDailyCustomer;
-      numClients=randomNumber.getNumber();
-
-      // obtain the amount of cookies sold per customer
-      randomNumber.minValue=1;
-      randomNumber.maxValue=this.avgCookieSale;
-      numCookies=randomNumber.getNumber(); 
-     
-      // multiply the ramdom amount of cookies, for the random amount of customers, to know the real amount of sold cookies
-      totalNumCookiesPerSale = numClients * numCookies;
-     
-      // update the value of hourlySales[column1] where the  hours is the indicated
-      for (var i=0; i<this.hourlySales.length;i++)
-      {
-        if (this.hourlySales[i][0] === hourSale)
-        { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
-          this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
-          this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
-        }
-      }
-      // add the sales and customers, to the global STORE sales
-     this.soldCookiesPerDay = this.soldCookiesPerDay + totalNumCookiesPerSale;  //numCookies;
-     this.dailyNumCustomers = this.dailyNumCustomers + numClients;
-     // Update global CORPORATE sales
-     corporate.addSale(this.location,totalNumCookiesPerSale,numClients);
-   }  // addSale
-}  //dubaiStore
-
-
-var parisStore = {
-  location:'Paris',
-  minDailyCustomer:20,
-  maxDailyCustomer:38,
-  avgCookieSale:2.3,
-  soldCookiesPerDay:0,
-  dailyNumCustomers:0,
-  /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
-  hourlySales:[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]],
-
-  addSale : function(hourSale){
-    var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
-   
-      randomNumber = generateRandomNumber;   
-      // obtain the random amounts of clients and cookies sold.
-      randomNumber.minValue=this.minDailyCustomer;
-      randomNumber.maxValue=this.maxDailyCustomer;
-      numClients=randomNumber.getNumber();
-
-      // obtain the amount of cookies sold per customer
-      randomNumber.minValue=1;
-      randomNumber.maxValue=this.avgCookieSale;
-      numCookies=randomNumber.getNumber(); 
-     
-      // multiply the ramdom amount of cookies, for the random amount of customers, to know the real amount of sold cookies
-      totalNumCookiesPerSale = numClients * numCookies;
-     
-      // update the value of hourlySales[column1] where the  hours is the indicated
-      for (var i=0; i<this.hourlySales.length;i++)
-      {
-        if (this.hourlySales[i][0] === hourSale)
-        { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
-          this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
-          this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
-        }
-      }
-      // add the sales and customers, to the global STORE sales
-     this.soldCookiesPerDay = this.soldCookiesPerDay + totalNumCookiesPerSale;  //numCookies;
-     this.dailyNumCustomers = this.dailyNumCustomers + numClients;
-     // Update global CORPORATE sales
-     corporate.addSale(this.location,totalNumCookiesPerSale,numClients);
-   }  // addSale
-}  //parisStore
-
-
-var limaStore = {
-  location:'Lima',
-  minDailyCustomer:2,
-  maxDailyCustomer:16,
-  avgCookieSale:4.6,
-  soldCookiesPerDay:0,
-  dailyNumCustomers:0,
-  /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
-  hourlySales:[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]],
-
-  addSale : function(hourSale){
-    var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
-   
-      randomNumber = generateRandomNumber;   
-      // obtain the random amounts of clients and cookies sold.
-      randomNumber.minValue=this.minDailyCustomer;
-      randomNumber.maxValue=this.maxDailyCustomer;
-      numClients=randomNumber.getNumber();
-
-      // obtain the amount of cookies sold per customer
-      randomNumber.minValue=1;
-      randomNumber.maxValue=this.avgCookieSale;
-      numCookies=randomNumber.getNumber(); 
-     
-      // multiply the ramdom amount of cookies, for the random amount of customers, to know the real amount of sold cookies
-      totalNumCookiesPerSale = numClients * numCookies;
-     
-      // update the value of hourlySales[column1] where the  hours is the indicated
-      for (var i=0; i<this.hourlySales.length;i++)
-      {
-        if (this.hourlySales[i][0] === hourSale)
-        { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
-          this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
-          this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
-        }
-      }
-      // add the sales and customers, to the global STORE sales
-     this.soldCookiesPerDay = this.soldCookiesPerDay + totalNumCookiesPerSale;  //numCookies;
-     this.dailyNumCustomers = this.dailyNumCustomers + numClients;
-     // Update global CORPORATE sales
-     corporate.addSale(this.location,totalNumCookiesPerSale,numClients);
-   }  // addSale
-}  //limaStore
 
 
 // .getNumber generates a random rumber between minValue and maxValue
@@ -267,99 +91,85 @@ var corporate = {
   }  //addSale
 }  // var corporate
 
+// CONSTRUCTOR DECLATION
+function Store(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,soldCookiesPerDay,dailyNumCustomers)
+{ 
+  this.location = location;
+  this.minDailyCustomer = minDailyCustomer;
+  this.maxDailyCustomer = maxDailyCustomer;
+  this.avgCookieSale = avgCookieSale;
+  this.soldCookiesPerDay = soldCookiesPerDay;
+  this.dailyNumCustomers = dailyNumCustomers;
+  /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
+  this.hourlySales=[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]];
 
-// testing
 
+} // CONSTRUCTOR function Store
 
-seattleStore.addSale(6);
-seattleStore.addSale(7);
-seattleStore.addSale(8);
-seattleStore.addSale(9);
-seattleStore.addSale(10);
-seattleStore.addSale(11);
-seattleStore.addSale(12);
-seattleStore.addSale(13);
-seattleStore.addSale(14);
-seattleStore.addSale(15);
-seattleStore.addSale(16);
-seattleStore.addSale(17);
-seattleStore.addSale(18);
-seattleStore.addSale(19);
+Store.prototype.addSale = function(hourSale)
+  {
+    var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
 
-tokioStore.addSale(6);
-tokioStore.addSale(7);
-tokioStore.addSale(8);
-tokioStore.addSale(9);
-tokioStore.addSale(10);
-tokioStore.addSale(11);
-tokioStore.addSale(12);
-tokioStore.addSale(13);
-tokioStore.addSale(14);
-tokioStore.addSale(15);
-tokioStore.addSale(16);
-tokioStore.addSale(17);
-tokioStore.addSale(18);
-tokioStore.addSale(19);
+    randomNumber = generateRandomNumber;   
+    // obtain the random amounts of clients and cookies sold.
+    randomNumber.minValue=this.minDailyCustomer;
+    randomNumber.maxValue=this.maxDailyCustomer;
+    numClients=randomNumber.getNumber();
 
-dubaiStore.addSale(6);
-dubaiStore.addSale(7);
-dubaiStore.addSale(8);
-dubaiStore.addSale(9);
-dubaiStore.addSale(10);
-dubaiStore.addSale(11);
-dubaiStore.addSale(12);
-dubaiStore.addSale(13);
-dubaiStore.addSale(14);
-dubaiStore.addSale(15);
-dubaiStore.addSale(16);
-dubaiStore.addSale(17);
-dubaiStore.addSale(18);
-dubaiStore.addSale(19);
-
-parisStore.addSale(6);
-parisStore.addSale(7);
-parisStore.addSale(8);
-parisStore.addSale(9);
-parisStore.addSale(10);
-parisStore.addSale(11);
-parisStore.addSale(12);
-parisStore.addSale(13);
-parisStore.addSale(14);
-parisStore.addSale(15);
-parisStore.addSale(16);
-parisStore.addSale(17);
-parisStore.addSale(18);
-parisStore.addSale(19);
-
-limaStore.addSale(6);
-limaStore.addSale(7);
-limaStore.addSale(8);
-limaStore.addSale(9);
-limaStore.addSale(10);
-limaStore.addSale(11);
-limaStore.addSale(12);
-limaStore.addSale(13);
-limaStore.addSale(14);
-limaStore.addSale(15);
-limaStore.addSale(16);
-limaStore.addSale(17);
-limaStore.addSale(18);
-limaStore.addSale(19);
+    // obtain the amount of cookies sold per customer
+    randomNumber.minValue=1;
+    randomNumber.maxValue=this.avgCookieSale;
+    numCookies=randomNumber.getNumber(); 
+   
+    // multiply the ramdom amount of cookies, for the random amount of customers, to know the real amount of sold cookies
+    totalNumCookiesPerSale = numClients * numCookies;
+   
+    // update the value of hourlySales[column1] where the  hours is the indicated
+    for (var i=0; i<this.hourlySales.length;i++)
+    {
+      if (this.hourlySales[i][0] === hourSale)
+      { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
+        this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
+        this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
+      }
+    }
+    // add the sales and customers, to the global STORE sales
+   this.soldCookiesPerDay = this.soldCookiesPerDay + totalNumCookiesPerSale;  //numCookies;
+   this.dailyNumCustomers = this.dailyNumCustomers + numClients;
+   // Update global CORPORATE sales
+   corporate.addSale(this.location,totalNumCookiesPerSale,numClients);
+  } //Store.prototype.addSale
 
 
 
-displayGlobalInfo(corporate);
-addStoreRowTblInfo(seattleStore);
-addStoreRowTblInfo(tokioStore);
-addStoreRowTblInfo(dubaiStore);
-addStoreRowTblInfo(parisStore);
-addStoreRowTblInfo(limaStore);
+///////////////////////////
+//// CREATE STORE OBJECTS
+///////////////////////////
 
-displayStoreInfo(seattleStore);
-displayStoreInfo(tokioStore);
-displayStoreInfo(dubaiStore);
-displayStoreInfo(parisStore);
-displayStoreInfo(limaStore);
+var SeattleStore = new Store('Seattle',23,65,6.3,0,0);
+var TokioStore = new Store('Tokio',3,24,1.2,0,0);
+var DubaiStore = new Store('Dubai',11,38,3.7,0,0);
+var ParisStore = new Store('Paris',20,38,2.3,0,0);
+var LimaStore = new Store('Lima',2,16,4.6,0,0);
+
+///////////////////////////
+//// / CREATE FAKE SALES FOR EACH STORE. Just to hardcode the for of each hour
+///////////////////////////
+
+for (var i=6; i<20;i++) //i know there are 13 working hours now en each store
+{
+  SeattleStore.addSale(i);
+  TokioStore.addSale(i);
+  DubaiStore.addSale(i);
+  ParisStore.addSale(i);
+  LimaStore.addSale(i);
+} //for (var i=6; i<20;i++)
+
+
+
+///////////////////////////
+//// DISPLAYING INFO
+///////////////////////////
 
 function displayGlobalInfo(company)
 {
@@ -425,12 +235,7 @@ var tableEl = document.getElementById(storeName);
 var trEl, tdEl;
 
 
-////
-// me quede intenrando poner el nombre de la tabla
 
-// var tableEl = document.getElementById(headerStore);
-// // tableEl.textContent="test";
-////
 
     for (var i=0; i<store.hourlySales.length;i++)
     {
