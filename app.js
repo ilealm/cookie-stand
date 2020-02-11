@@ -340,11 +340,32 @@ limaStore.addSale(17);
 limaStore.addSale(18);
 limaStore.addSale(19);
 
+
+
+displayGlobalInfo(corporate);
 addStoreRowTblInfo(seattleStore);
 addStoreRowTblInfo(tokioStore);
 addStoreRowTblInfo(dubaiStore);
 addStoreRowTblInfo(parisStore);
 addStoreRowTblInfo(limaStore);
+
+function displayGlobalInfo(company)
+{
+    ///position on the display table
+    var tableEl = document.getElementById('tblGlobalInfo');
+    var trEl, tdEl;
+    // new row
+    trEl =document.createElement('tr');
+      // td globalDailyCookiesSold
+      tdEl = document.createElement('td');
+      tdEl.textContent=company.globalDailyCookiesSold;
+      trEl.appendChild(tdEl);
+      // td globalDailyClients
+      tdEl = document.createElement('td');
+      tdEl.textContent=company.globalDailyClients;
+      trEl.appendChild(tdEl);
+    tableEl.appendChild(trEl);
+} //displayGlobalInfo
 
 function addStoreRowTblInfo(store)
 {
