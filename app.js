@@ -9,8 +9,9 @@ var seattleStore = {
   avgCookieSale:6.3,
   soldCookiesPerDay:0,
   dailyNumCustomers:0,
-  /* position0 = hour; position1 =sales per hour */
-  hourlySales:[[6,0],[7,0],[8,0],[9,0],[10,0],[11,0],[12,0],[13,0],[14,0],[15,0],[16,0],[17,0],[18,0],[19,0]],
+  
+  /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
+  hourlySales:[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]],
 
 
   addSale : function(hourSale){
@@ -36,6 +37,7 @@ var seattleStore = {
         if (this.hourlySales[i][0] === hourSale)
         { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
           this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
+          this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
         }
       }
       // add the sales and customers, to the global STORE sales
@@ -54,8 +56,8 @@ var tokioStore = {
   avgCookieSale:1.2,
   soldCookiesPerDay:0,
   dailyNumCustomers:0,
-  /* position0 = hour; position1 =sales per hour */
-  hourlySales:[[6,0],[7,0],[8,0],[9,0],[10,0],[11,0],[12,0],[13,0],[14,0],[15,0],[16,0],[17,0],[18,0],[19,0]],
+  /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
+  hourlySales:[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]],
 
   addSale : function(hourSale){
     var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
@@ -80,6 +82,7 @@ var tokioStore = {
         if (this.hourlySales[i][0] === hourSale)
         { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
           this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
+          this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
         }
       }
       // add the sales and customers, to the global STORE sales
@@ -98,8 +101,8 @@ var dubaiStore = {
   avgCookieSale:3.7,
   soldCookiesPerDay:0,
   dailyNumCustomers:0,
-  /* position0 = hour; position1 =sales per hour */
-  hourlySales:[[6,0],[7,0],[8,0],[9,0],[10,0],[11,0],[12,0],[13,0],[14,0],[15,0],[16,0],[17,0],[18,0],[19,0]],
+  /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
+  hourlySales:[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]],
 
   addSale : function(hourSale){
     var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
@@ -124,6 +127,7 @@ var dubaiStore = {
         if (this.hourlySales[i][0] === hourSale)
         { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
           this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
+          this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
         }
       }
       // add the sales and customers, to the global STORE sales
@@ -142,8 +146,8 @@ var parisStore = {
   avgCookieSale:2.3,
   soldCookiesPerDay:0,
   dailyNumCustomers:0,
-  /* position0 = hour; position1 =sales per hour */
-  hourlySales:[[6,0],[7,0],[8,0],[9,0],[10,0],[11,0],[12,0],[13,0],[14,0],[15,0],[16,0],[17,0],[18,0],[19,0]],
+  /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
+  hourlySales:[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]],
 
   addSale : function(hourSale){
     var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
@@ -168,6 +172,7 @@ var parisStore = {
         if (this.hourlySales[i][0] === hourSale)
         { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
           this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
+          this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
         }
       }
       // add the sales and customers, to the global STORE sales
@@ -186,8 +191,8 @@ var limaStore = {
   avgCookieSale:4.6,
   soldCookiesPerDay:0,
   dailyNumCustomers:0,
-  /* position0 = hour; position1 =sales per hour */
-  hourlySales:[[6,0],[7,0],[8,0],[9,0],[10,0],[11,0],[12,0],[13,0],[14,0],[15,0],[16,0],[17,0],[18,0],[19,0]],
+  /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
+  hourlySales:[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]],
 
   addSale : function(hourSale){
     var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
@@ -212,6 +217,7 @@ var limaStore = {
         if (this.hourlySales[i][0] === hourSale)
         { // i found the correct hour of the sale, now Im going to update the amount of sales from that sales
           this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
+          this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
         }
       }
       // add the sales and customers, to the global STORE sales
@@ -349,6 +355,12 @@ addStoreRowTblInfo(dubaiStore);
 addStoreRowTblInfo(parisStore);
 addStoreRowTblInfo(limaStore);
 
+displayStoreInfo(seattleStore);
+displayStoreInfo(tokioStore);
+displayStoreInfo(dubaiStore);
+displayStoreInfo(parisStore);
+displayStoreInfo(limaStore);
+
 function displayGlobalInfo(company)
 {
     ///position on the display table
@@ -404,4 +416,41 @@ function addStoreRowTblInfo(store)
 } //addStoreRowTblInfo
 
 
- 
+
+function displayStoreInfo(store)
+{
+  var storeName = 'tblStore' + store.location;
+// var tableEl = document.getElementById('tblStoreSeattle');
+var tableEl = document.getElementById(storeName);
+var trEl, tdEl;
+
+
+////
+// me quede intenrando poner el nombre de la tabla
+
+// var tableEl = document.getElementById(headerStore);
+// // tableEl.textContent="test";
+////
+
+    for (var i=0; i<store.hourlySales.length;i++)
+    {
+      /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
+      var trEl =document.createElement('tr');
+        var  tdEl0 = document.createElement('td');
+          tdEl0.textContent=store.hourlySales[i][0];
+          trEl.appendChild(tdEl0);
+        
+        var  tdEl1 = document.createElement('td');
+        tdEl1.textContent=store.hourlySales[i][1];
+        trEl.appendChild(tdEl1);
+
+        var  tdEl2 = document.createElement('td');
+        tdEl2.textContent=store.hourlySales[i][2];
+        trEl.appendChild(tdEl2);
+        
+       tableEl.appendChild(trEl);
+      
+    } // for (var i=0; i<store.length;i++)
+
+
+} // displayStoreInfo
