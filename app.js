@@ -114,6 +114,26 @@ var generateRandomNumber = {
    }
 } //genRandomNumber
 
+function fortatTo12Hrs(hourToFormat) 
+{
+  var formatedHour;
+  if (hourToFormat<12)
+  {
+    formatedHour = hourToFormat + ':00 am';
+  }
+  else if (hourToFormat==12) 
+    {
+      formatedHour = hourToFormat + ':00 pm';
+    }
+    else
+    {
+      formatedHour = (hourToFormat-12) + ':00 pm';
+    }
+  return formatedHour;
+} // function fortatTo12Hrs
+
+
+
 ///////////////////////////
 //// CREATE STORE OBJECTS
 ///////////////////////////
@@ -164,7 +184,7 @@ var tblHourlySales = document.getElementById('tblGlobalHourlySales');
    for (var i=0; i<corporate.globalHourlySales.length;i++)
     { 
       thHeader = document.createElement('th');
-      thHeader.textContent=corporate.globalHourlySales[i][0];  //TODO convert to 12h format
+      thHeader.textContent=fortatTo12Hrs(corporate.globalHourlySales[i][0]);  
       tblHourlySales.appendChild(thHeader);
       //CREATE FOOTER
       tdFooter = document.createElement('td');
