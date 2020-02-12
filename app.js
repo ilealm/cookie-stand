@@ -40,7 +40,8 @@ MainOffice.prototype.addSale = function(store, cookiesSold, numClients,hourSale)
 
 
 // CONSTRUCTOR DECLATION
-function Store(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,soldCookiesPerDay,dailyNumCustomers)
+function Store(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,
+          soldCookiesPerDay,dailyNumCustomers,address, openHours, contact, additionalInfo)
 { 
   this.location = location;
   this.minDailyCustomer = minDailyCustomer;
@@ -48,6 +49,10 @@ function Store(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,soldCook
   this.avgCookieSale = avgCookieSale;
   this.soldCookiesPerDay = soldCookiesPerDay;
   this.dailyNumCustomers = dailyNumCustomers;
+  this.address = address;
+  this.openHours = openHours;   
+  this.contat = contact;
+  this.additionalInfo = additionalInfo;
   /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
   this.hourlySales=[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]];
 } // CONSTRUCTOR function Store
@@ -139,11 +144,11 @@ function fortatTo12Hrs(hourToFormat)
 ///////////////////////////
 
 var corporate = new MainOffice();
-var SeattleStore = new Store('Seattle',23,65,6.3,0,0);
-var TokioStore = new Store('Tokio',3,24,1.2,0,0);
-var DubaiStore = new Store('Dubai',11,38,3.7,0,0);
-var ParisStore = new Store('Paris',20,38,2.3,0,0);
-var LimaStore = new Store('Lima',2,16,4.6,0,0);
+var SeattleStore = new Store('Seattle',23,65,6.3,0,0,'2543 4th ave, Seattle, WA, US.','06 am - 07:00 pm', 'Susan May','14th February Special SALE');
+var TokioStore = new Store('Tokio',3,24,1.2,0,0,'4hao Lou 106shi', '06 am - 07:00 pm','Liao Shuren','Special 2x1');
+var DubaiStore = new Store('Dubai',11,38,3.7,0,0,'P.O.Box 8, No 821, Gr Fl','06 am - 07:00 pm', 'Alenna Grusp','Join us! We are hiring.');
+var ParisStore = new Store('Paris',20,38,2.3,0,0,'60 rue du Fossé des Tanneurs','06 am - 07:00 pm','Alex Asselin', 'Try our new seasonal flavor');
+var LimaStore = new Store('Lima',2,16,4.6,0,0,'Cantuarias 226 Tda 62 - Miraflores','06 am - 07:00 pm', 'Spe∫cial sale event this weekend.');
 
 ///////////////////////////
 //// / CREATE FAKE SALES FOR EACH STORE. Just to hardcode the for of each hour
@@ -157,7 +162,6 @@ for (var i=6; i<20;i++) //i know there are 13 working hours now en each store
   ParisStore.addSale(i);
   LimaStore.addSale(i);
 } //for (var i=6; i<20;i++)
-
 
 
 ///////////////////////////
@@ -191,8 +195,6 @@ var tblHourlySales = document.getElementById('tblGlobalHourlySales');
       tdFooter.textContent = corporate.globalHourlySales[i][1];  // // 0:hour | 1:globalCookiesSales
       trFooter.appendChild(tdFooter);
     }
-
-
 
     tblHourlySales.appendChild(SeattleStore.renderByHour());
     tblHourlySales.appendChild(TokioStore.renderByHour());

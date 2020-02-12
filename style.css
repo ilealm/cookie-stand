@@ -3,8 +3,41 @@ body {
 
 }
 
+nav{
+  background-color: rgb(90, 71, 99);
+}
+
+
+#displayImages {
+  display:inline-block;
+  margin: 10px;
+  width: 300px;
+  vertical-align: top;
+}
+  
+
+aside{
+  display:inline-block;
+  /*float: left;*/
+  margin: 10px;
+  width: 250px;
+  border-style: solid;
+  background-color: violet;
+}
+
+header{
+  background-color: palegreen;
+
+}
+
+
+
+.liStoreDetails{
+  
+}
+
 #logo{
-  width: 350px;
+  width: 200px;
   padding: 30px;
   /* padding-top: 30px;
   padding-right: 150;
@@ -26,7 +59,7 @@ body {
 }
 
 
-#divHeader{
-  /* background-color:gray; */
-  border-style: solid;
+
+footer{
+background-color: steelblue;
 }
