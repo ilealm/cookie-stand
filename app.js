@@ -154,15 +154,24 @@ var tblHourlySales = document.getElementById('tblGlobalHourlySales');
   tblHourlySales.appendChild(trEl);
 
   var thHeader = document.createElement('th'); // this will be the 0,0. must be empty
-  //thHeader.textContent="dsfdsf"; 
+
+  var trFooter = document.createElement('tr');
+  var tdFooter = document.createElement('td');
+  tdFooter.textContent ="Totals"; 
+  trFooter.appendChild(tdFooter);
+
   tblHourlySales.appendChild(thHeader);
    for (var i=0; i<corporate.globalHourlySales.length;i++)
     { 
       thHeader = document.createElement('th');
       thHeader.textContent=corporate.globalHourlySales[i][0];  //TODO convert to 12h format
       tblHourlySales.appendChild(thHeader);
-      //todo create footer
+      //CREATE FOOTER
+      tdFooter = document.createElement('td');
+      tdFooter.textContent = corporate.globalHourlySales[i][1];  // // 0:hour | 1:globalCookiesSales
+      trFooter.appendChild(tdFooter);
     }
+
 
 
     tblHourlySales.appendChild(SeattleStore.renderByHour());
@@ -171,6 +180,7 @@ var tblHourlySales = document.getElementById('tblGlobalHourlySales');
     tblHourlySales.appendChild(ParisStore.renderByHour());
     tblHourlySales.appendChild(LimaStore.renderByHour());
 
+    tblHourlySales.appendChild(trFooter);
 
 } // displayHourlyTable
 
