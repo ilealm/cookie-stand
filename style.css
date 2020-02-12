@@ -1,0 +1,32 @@
+body {
+
+
+}
+
+#logo{
+  width: 350px;
+  padding: 30px;
+  /* padding-top: 30px;
+  padding-right: 150;
+
+  padding-bottom: 30px; */
+}
+
+#salmonTitle{
+  font-size: 80px;
+  font-family: 'Fredericka the Great';
+  color:brown;
+  padding-left: 130px;
+ 
+  /* padding-bottom: 0px; */
+  border-style: solid;
+  /* padding-top: 50px; */
+  /* float: right; */
+
+}
+
+
+#divHeader{
+  /* background-color:gray; */
+  border-style: solid;
+}
