@@ -6,6 +6,7 @@ function MainOffice()
   this.name = 'Salmon Cookies';
   // array pos0=storeName | pos1=dailyCookiesSold | pos2:da¡ilyCustomers
   this.stores = [['Seattle',0,0],['Tokio',0,0],['dubai',0,0],['paris',0,0],['lima',0,0]];
+  // TODO CHANGE HOW THIS ARRAY IS CREATED ADD USE SOMEWHERE THE PUSH
   this.globalDailyCookiesSold = 0;
   this.globalDailyClients = 0;
   // 0:hour | 1:globalCookiesSales

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- https://www.w3schools.com/html/html_layout.asp -->
+  <link rel="stylesheet" href="style.css"></link>
+  <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salmon cookies</title>
+</head>
+<body>
+ <header>
+    <img id="logo" src="images/fish.jpg">
+    <div id="salmonTitle">Salmon Cookies</div>
+ </header>
+ <nav id="navSalmonCookies">
+  <a href="sales.html">Sales</a>
+</nav>
+<br> <br>
+<form id="storeForm">
+
+  <fieldset>
+    <legend>Store location information</legend>
+  
+    <table id="tblStoreLocation">
+      <tr>
+        <td>Location</td>
+        <td> 
+          <input name="location" type="text">
+        </td>
+      </tr>
+      <tr>
+        <td> Address</td>
+        <td> 
+          <input name="address" type="text">
+        </td>
+      </tr>
+      <tr>
+        <td> Open Hours</td>
+        <td> 
+          <input name="openHours" type="text" value="06 am - 07:00 pm">
+        </td>
+      </tr>
+      <tr>
+        <td> Contact</td>
+        <td> 
+          <input name="contact" type="text">
+        </td>
+      </tr>
+      <tr>
+        <td>Additional Info </td>
+        <td> 
+          <input name="additionalInfo" type="text">
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+  <br><br>
+  <fieldset>
+    <legend>Average Daily Sales</legend>
+    <table  id="tblStoreAverage">
+      <tr>
+        <td> Minimum daily customers </td>
+        <td> 
+          <input name="minDailyCustomer" type="number" >
+        </td>
+      </tr>
+      <tr>
+        <td> Maximum daily customers </td>
+        <td> 
+          <input name="maxDailyCustomer" type="number" >
+        </td>
+      </tr>
+      <tr>
+        <td> Average cookie sales </td>
+        <td> 
+          <input name="avgCookieSale" type="number" >
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+  <br><br>
+  <div class="divButton">
+    <button type="submit" id="btnSubbmit">Create store!</button>
+  </div>
+</form>
+
+
+
+ <script src="app.js"></script>
+</body>
+</html>
