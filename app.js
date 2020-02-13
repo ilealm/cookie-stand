@@ -40,7 +40,8 @@ MainOffice.prototype.addSale = function(store, cookiesSold, numClients,hourSale)
 
 
 // CONSTRUCTOR DECLATION
-function Store(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,soldCookiesPerDay,dailyNumCustomers)
+function Store(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,
+          soldCookiesPerDay,dailyNumCustomers,address, openHours, contact, additionalInfo)
 { 
   this.location = location;
   this.minDailyCustomer = minDailyCustomer;
@@ -48,6 +49,10 @@ function Store(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,soldCook
   this.avgCookieSale = avgCookieSale;
   this.soldCookiesPerDay = soldCookiesPerDay;
   this.dailyNumCustomers = dailyNumCustomers;
+  this.address = address;
+  this.openHours = openHours;   
+  this.contact = contact;
+  this.additionalInfo = additionalInfo;
   /* | 0 = hour; | 1 =cookies sales per hour | 2= customers per hour*/
   this.hourlySales=[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]];
 } // CONSTRUCTOR function Store
@@ -139,11 +144,11 @@ function fortatTo12Hrs(hourToFormat)
 ///////////////////////////
 
 var corporate = new MainOffice();
-var SeattleStore = new Store('Seattle',23,65,6.3,0,0);
-var TokioStore = new Store('Tokio',3,24,1.2,0,0);
-var DubaiStore = new Store('Dubai',11,38,3.7,0,0);
-var ParisStore = new Store('Paris',20,38,2.3,0,0);
-var LimaStore = new Store('Lima',2,16,4.6,0,0);
+var SeattleStore = new Store('Seattle',23,65,6.3,0,0,'2543 4th ave, Seattle, WA, US.','06 am - 07:00 pm', 'Susan May','14th February Special SALE');
+var TokioStore = new Store('Tokio',3,24,1.2,0,0,'4hao Lou 106shi', '06 am - 07:00 pm','Liao Shuren','Special 2x1');
+var DubaiStore = new Store('Dubai',11,38,3.7,0,0,'P.O.Box 8, No 821, Gr Fl','06 am - 07:00 pm', 'Alenna Grusp','Join us! We are hiring.');
+var ParisStore = new Store('Paris',20,38,2.3,0,0,'60 rue du Fossé des Tanneurs','06 am - 07:00 pm','Alex Asselin', 'Try our new seasonal flavor');
+var LimaStore = new Store('Lima',2,16,4.6,0,0,'Cantuarias 226 Tda 62 - Miraflores','06 am - 07:00 pm', 'Spe∫cial sale event this weekend.');
 
 ///////////////////////////
 //// / CREATE FAKE SALES FOR EACH STORE. Just to hardcode the for of each hour
@@ -159,15 +164,22 @@ for (var i=6; i<20;i++) //i know there are 13 working hours now en each store
 } //for (var i=6; i<20;i++)
 
 
-
 ///////////////////////////
 //// DISPLAYING INFO
 ///////////////////////////
 displayHourlyTable();
+displayStoresLocations(SeattleStore);
+displayStoresLocations(TokioStore);
+displayStoresLocations(DubaiStore);
+displayStoresLocations(ParisStore);
+displayStoresLocations(LimaStore);
+
 
 function displayHourlyTable()
 {
-var tblHourlySales = document.getElementById('tblGlobalHourlySales');
+var tblHourlySales = document.getElementById('tblGlobalHourlySales') || null;
+
+if (!tblHourlySales) return;
 
   // create header and foother
   var trEl = document.createElement('tr')
@@ -192,8 +204,6 @@ var tblHourlySales = document.getElementById('tblGlobalHourlySales');
       trFooter.appendChild(tdFooter);
     }
 
-
-
     tblHourlySales.appendChild(SeattleStore.renderByHour());
     tblHourlySales.appendChild(TokioStore.renderByHour());
     tblHourlySales.appendChild(DubaiStore.renderByHour());
@@ -208,6 +218,34 @@ var tblHourlySales = document.getElementById('tblGlobalHourlySales');
 // display store info by hour
 // display hourly totals
 
+function displayStoresLocations(store)
+{
+  var ulElement = document.getElementById("ulStoreList");
+
+  var liElement = document.createElement('li');
+  liElement.textContent = store.location;
+  ulElement.appendChild(liElement);
+
+  var nestedUl = document.createElement('ul');
+  ulElement.appendChild(nestedUl);
+
+  var nestedLi = document.createElement('li');
+  nestedLi.textContent= store.address;
+  nestedUl.appendChild(nestedLi);
+
+  nestedLi = document.createElement('li');
+  nestedLi.textContent= store.openHours;
+  nestedUl.appendChild(nestedLi);
+
+  nestedLi = document.createElement('li');
+  nestedLi.textContent= store.contact;
+  nestedUl.appendChild(nestedLi);
+
+  nestedLi = document.createElement('li');
+  nestedLi.textContent= store.additionalInfo;
+  nestedUl.appendChild(nestedLi);
+
+}
 
 
 
