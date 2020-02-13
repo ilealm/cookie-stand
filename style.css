@@ -1,10 +1,53 @@
 body {
-
-
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color:coral;
+  /*font-family: Arial, Helvetica, sans-serif;*/
 }
 
+
+header{
+  background-color:	#F9E3B1;
+}
+
+#logo{
+  width: 200px;
+  padding: 40px;
+ /* border-style: solid; */
+}
+
+#salmonTitle{
+  font-size: 80px;
+  font-family: 'Fredericka the Great';
+  color: coral;
+  padding-left: 180px;
+  display: inline-flex;
+  vertical-align: 100px;  /* THIS IS THE ONE THAT CENTER THE DIV TO THE HEATER !!*/
+  /*color:brown;
+  border-style: solid;
+  */
+}
+
+
 nav{
-  background-color: rgb(90, 71, 99);
+  /*background-color: rgb(180, 161, 189);*/
+  text-align: right;
+  padding: 10px;
+  padding-right: 100px;
+ 
+}
+
+a{
+  color:coral;
+}
+
+aside{
+  display:inline-block;
+  margin: 10px;
+  width: 250px;
+
+  padding-left: 80px;
+  /*border-style: solid;
+  background-color: violet;*/
 }
 
 
@@ -13,22 +56,13 @@ nav{
   margin: 10px;
   width: 300px;
   vertical-align: top;
+
+  /*background-color: thistle;*/
 }
   
 
-aside{
-  display:inline-block;
-  /*float: left;*/
-  margin: 10px;
-  width: 250px;
-  border-style: solid;
-  background-color: violet;
-}
 
-header{
-  background-color: palegreen;
 
-}
 
 
 
@@ -36,27 +70,9 @@ header{
   
 }
 
-#logo{
-  width: 200px;
-  padding: 30px;
-  /* padding-top: 30px;
-  padding-right: 150;
 
-  padding-bottom: 30px; */
-}
 
-#salmonTitle{
-  font-size: 80px;
-  font-family: 'Fredericka the Great';
-  color:brown;
-  padding-left: 130px;
- 
-  /* padding-bottom: 0px; */
-  border-style: solid;
-  /* padding-top: 50px; */
-  /* float: right; */
 
-}
 
 
 
