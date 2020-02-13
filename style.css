@@ -32,6 +32,11 @@ button{
   color:coral;
 }
 
+button:hover {
+  background-color: coral;
+  color: white;
+}
+
 legend {
   color: coral;
 

@@ -221,7 +221,13 @@ if (!tblHourlySales) return;
 
 function displayStoresLocations(store)
 {
-  var ulElement = document.getElementById("ulStoreList");
+  // original, remove: var ulElement = document.getElementById("ulStoreList");
+
+  var ulElement = document.getElementById("ulStoreList") || null;;
+
+  if (!ulElement) return; // if the main page is not index.html, this process should not be executed
+
+
 
   var liElement = document.createElement('li');
   liElement.textContent = store.location;
@@ -339,3 +345,43 @@ function displayStoresLocations(store)
 
 
 // } // displayStoreInfo
+
+
+///////////////////////////
+//// EVENT HANDLER
+///////////////////////////
+
+function createStore(event)
+{
+
+  //TODO: UPDATE CONTROLS TO REQUIRED
+  console.log('Creating new store');
+ 
+
+  var location,address,openHours,contact,additionalInfo,minDailyCustomer,maxDailyCustomer,avgCookieSale;
+
+    location = event.target.location.value;
+    address = event.target.address.value;
+    openHours = event.target.openHours.value;
+    contact = event.target.contact.value;
+    additionalInfo = event.target.additionalInfo.value;
+    minDailyCustomer = event.target.minDailyCustomer.value;
+    maxDailyCustomer = event.target.maxDailyCustomer.value;
+    avgCookieSale = event.target.avgCookieSale.value;
+
+  console.log(location);
+  console.log(address);
+  console.log(openHours);
+  console.log(contact);
+  console.log(additionalInfo);
+  console.log(minDailyCustomer);
+  console.log(maxDailyCustomer);
+  console.log(avgCookieSale);
+
+
+  event.preventDefault();
+
+} // function createStore
+
+var form = document.getElementById('formStore');
+form.addEventListener("submit",createStore);

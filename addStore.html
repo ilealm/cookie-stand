@@ -17,8 +17,7 @@
   <a href="sales.html">Sales</a>
 </nav>
 <br> <br>
-<form id="storeForm">
-
+<form id="formStore">
   <fieldset>
     <legend>Store location information</legend>
   
@@ -26,31 +25,31 @@
       <tr>
         <td>Location</td>
         <td> 
-          <input name="location" type="text">
+          <input name="location" type="text" required>
         </td>
       </tr>
       <tr>
         <td> Address</td>
         <td> 
-          <input name="address" type="text">
+          <input name="address" type="text" required>
         </td>
       </tr>
       <tr>
         <td> Open Hours</td>
         <td> 
-          <input name="openHours" type="text" value="06 am - 07:00 pm">
+          <input name="openHours" type="text" value="06 am - 07:00 pm" required>
         </td>
       </tr>
       <tr>
         <td> Contact</td>
         <td> 
-          <input name="contact" type="text">
+          <input name="contact" type="text" required>
         </td>
       </tr>
       <tr>
         <td>Additional Info </td>
         <td> 
-          <input name="additionalInfo" type="text">
+          <input name="additionalInfo" type="text" required>
         </td>
       </tr>
     </table>
@@ -62,19 +61,19 @@
       <tr>
         <td> Minimum daily customers </td>
         <td> 
-          <input name="minDailyCustomer" type="number" >
+          <input name="minDailyCustomer" type="number" required>
         </td>
       </tr>
       <tr>
         <td> Maximum daily customers </td>
         <td> 
-          <input name="maxDailyCustomer" type="number" >
+          <input name="maxDailyCustomer" type="number"  required>
         </td>
       </tr>
       <tr>
         <td> Average cookie sales </td>
         <td> 
-          <input name="avgCookieSale" type="number" >
+          <input name="avgCookieSale" type="text"  required>
         </td>
       </tr>
     </table>
