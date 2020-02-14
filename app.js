@@ -1,20 +1,42 @@
 'use strict';
 
+///////////////////////////
+//// C R E A T E   S T O R E   O B J E C T S
+///////////////////////////
 
 function MainOffice()
 {
   this.name = 'Salmon Cookies';
   // array pos0=storeName | pos1=dailyCookiesSold | pos2:da¡ilyCustomers
-  this.stores = [['Seattle',0,0],['Tokio',0,0],['dubai',0,0],['paris',0,0],['lima',0,0]];
+  //this.stores = [['Seattle',0,0],['Tokio',0,0],['dubai',0,0],['paris',0,0],['lima',0,0]];
+  this.stores = [];
+  // array with storeOBJECTS. I create a new one so I don't have tp change the parameter this.stores
+  this.storesObjectsArray = [];
   this.globalDailyCookiesSold = 0;
   this.globalDailyClients = 0;
   // 0:hour | 1:globalCookiesSales
   this.globalHourlySales=[[6,0],[7,0],[8,0],[9,0],[10,0],[11,0],[12,0],[13,0],[14,0],[15,0],[16,0],[17,0],[18,0],[19,0]];
 }  //funtion corporate
 
+MainOffice.prototype.addStore = function(location,minDailyCustomer,
+    maxDailyCustomer,avgCookieSale,soldCookiesPerDay,dailyNumCustomers,
+    address, openHours, contact, additionalInfo)
+{
+  
+  var newStore = new Store(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,
+                       soldCookiesPerDay,dailyNumCustomers,address, openHours, contact, additionalInfo);
+ 
+  this.stores.push([location,0,0]);
+  this.storesObjectsArray.push(newStore);
+  createFakeSales(newStore);
+  displayHourlyTable();
+} // MainOffice.prototype.addStore
+
+
+
 MainOffice.prototype.addSale = function(store, cookiesSold, numClients,hourSale)
 {
-  // update globals
+  // update globals sales and customers
   this.globalDailyCookiesSold = this.globalDailyCookiesSold + cookiesSold;
   this.globalDailyClients = this.globalDailyClients + numClients;
 
@@ -32,14 +54,13 @@ MainOffice.prototype.addSale = function(store, cookiesSold, numClients,hourSale)
   {
     if (this.globalHourlySales[i][0] === hourSale)  // i found the correct hour of the sale, Update the amount of globalHourlySales
     {
-      // console.log('cookiesSold ' + cookiesSold);
       this.globalHourlySales[i][1] = this.globalHourlySales[i][1] + cookiesSold; 
     }
   }
-}  //addSale
+}  // MainOffice.prototype.addSale
 
 
-// CONSTRUCTOR DECLATION
+
 function Store(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,
           soldCookiesPerDay,dailyNumCustomers,address, openHours, contact, additionalInfo)
 { 
@@ -91,33 +112,57 @@ Store.prototype.addSale = function(hourSale)
    corporate.addSale(this.location,totalNumCookiesPerSale,numClients,hourSale);
   } //Store.prototype.addSale
 
-Store.prototype.renderByHour = function()
+
+function createFakeSales(store)
+{
+  //TODO change this to accept any hours range
+  for (var i=6; i<20;i++) //i know there are 13 working hours now en each store
   {
-    var tdElement, trElement;
-    trElement = document.createElement('tr');
+    store.addSale(i);
+  } //for (var i=6; i<20;i++)
+}  // function createFakeSales(store)
 
-    tdElement = document.createElement('td');
-    tdElement.textContent = this.location;  
-    trElement.appendChild(tdElement);
 
-    for (var i=0; i<this.hourlySales.length;i++)
-    { 
-      tdElement = document.createElement('td');
-      tdElement.textContent = this.hourlySales[i][1];  //TODO convert to 12h format
-      trElement.appendChild(tdElement);
-    }
-    return(trElement);
-  } // Store.prototype.renderByHour = function()
 
-// Generates a random rumber between minValue and maxValue
-var generateRandomNumber = {
-  minValue:0,
-  maxValue:0,
-  getNumber : function(){
-    // I obtain (Math.random() * ((max - min) + 1)) + min from dzone.com/articles/random-number-generation-in-java  
-    return Math.floor((Math.random() * ((this.maxValue - this.minValue) + 1)) + this.minValue);  
-   }
-} //genRandomNumber
+// this function is for index.html
+//function displayStoresLocations(store)
+function displayStoresLocations()
+{
+ var ulElement = document.getElementById("ulStoreList") || null;;
+
+  /* if the main page is not index.html, this process should not be executed because
+    this ulStoreList does not exist  
+  */
+  if (!ulElement) return; 
+  if (corporate = null) return;
+
+  for (var i=0; i < corporate.storesObjectsArray.length ; i++)
+  {
+    var liElement = document.createElement('li');
+    liElement.textContent = corporate.storesObjectsArray[i].location;
+    ulElement.appendChild(liElement);
+  
+    var nestedUl = document.createElement('ul');
+    ulElement.appendChild(nestedUl);
+  
+    var nestedLi = document.createElement('li');
+    nestedLi.textContent= corporate.storesObjectsArray[i].address;
+    nestedUl.appendChild(nestedLi);
+  
+    nestedLi = document.createElement('li');
+    nestedLi.textContent= corporate.storesObjectsArray[i].openHours;
+    nestedUl.appendChild(nestedLi);
+  
+    nestedLi = document.createElement('li');
+    nestedLi.textContent= corporate.storesObjectsArray[i].contact;
+    nestedUl.appendChild(nestedLi);
+  
+    nestedLi = document.createElement('li');
+    nestedLi.textContent= corporate.storesObjectsArray[i].additionalInfo;
+    nestedUl.appendChild(nestedLi);
+
+  }
+} // function displayStoresLocations
 
 function fortatTo12Hrs(hourToFormat) 
 {
@@ -137,49 +182,56 @@ function fortatTo12Hrs(hourToFormat)
   return formatedHour;
 } // function fortatTo12Hrs
 
+Store.prototype.getStoreRenderRowByHour = function()
+  {
+    var tdElement, trElement;
+    trElement = document.createElement('tr');
 
+    tdElement = document.createElement('td');
+    tdElement.textContent = this.location;  
+    trElement.appendChild(tdElement);
 
-///////////////////////////
-//// CREATE STORE OBJECTS
-///////////////////////////
+    for (var i=0; i<this.hourlySales.length;i++)
+    { 
+      tdElement = document.createElement('td');
+      tdElement.textContent = this.hourlySales[i][1];  //TODO convert to 12h format
+      trElement.appendChild(tdElement);
+    }
+    return(trElement);
+  } // Store.prototype.getStoreRenderRowByHour = function()
 
-var corporate = new MainOffice();
-var SeattleStore = new Store('Seattle',23,65,6.3,0,0,'2543 4th ave, Seattle, WA, US.','06 am - 07:00 pm', 'Susan May','14th February Special SALE');
-var TokioStore = new Store('Tokio',3,24,1.2,0,0,'4hao Lou 106shi', '06 am - 07:00 pm','Liao Shuren','Special 2x1');
-var DubaiStore = new Store('Dubai',11,38,3.7,0,0,'P.O.Box 8, No 821, Gr Fl','06 am - 07:00 pm', 'Alenna Grusp','Join us! We are hiring.');
-var ParisStore = new Store('Paris',20,38,2.3,0,0,'60 rue du Fossé des Tanneurs','06 am - 07:00 pm','Alex Asselin', 'Try our new seasonal flavor');
-var LimaStore = new Store('Lima',2,16,4.6,0,0,'Cantuarias 226 Tda 62 - Miraflores','06 am - 07:00 pm', 'Spe∫cial sale event this weekend.');
+// Generates a random rumber between minValue and maxValue
+var generateRandomNumber = {
+  minValue:0,
+  maxValue:0,
+  getNumber : function(){
+    // I obtain (Math.random() * ((max - min) + 1)) + min from dzone.com/articles/random-number-generation-in-java  
+    return Math.floor((Math.random() * ((this.maxValue - this.minValue) + 1)) + this.minValue);  
+   }
+} //genRandomNumber
 
-///////////////////////////
-//// / CREATE FAKE SALES FOR EACH STORE. Just to hardcode the for of each hour
-///////////////////////////
-
-for (var i=6; i<20;i++) //i know there are 13 working hours now en each store
-{
-  SeattleStore.addSale(i);
-  TokioStore.addSale(i);
-  DubaiStore.addSale(i);
-  ParisStore.addSale(i);
-  LimaStore.addSale(i);
-} //for (var i=6; i<20;i++)
-
-
-///////////////////////////
-//// DISPLAYING INFO
-///////////////////////////
-displayHourlyTable();
-displayStoresLocations(SeattleStore);
-displayStoresLocations(TokioStore);
-displayStoresLocations(DubaiStore);
-displayStoresLocations(ParisStore);
-displayStoresLocations(LimaStore);
-
-
+/*
+This function creates the table to display the hourly sales by stores. It the table exist, all nodes are eliminated and
+appended the new ones.
+*/ 
 function displayHourlyTable()
 {
 var tblHourlySales = document.getElementById('tblGlobalHourlySales') || null;
 
 if (!tblHourlySales) return;
+
+
+  // update the title
+  var h3Title = document.getElementById('h3GlobalHourlySales');
+  h3Title.textContent = 'Global Sales by Hour';
+  
+  // delete all table nodes, so we can genereate the new table
+  var child = tblHourlySales.lastChild;
+  while (child)
+  {
+    tblHourlySales.removeChild(child);
+    child = tblHourlySales.lastChild;
+  }
 
   // create header and foother
   var trEl = document.createElement('tr')
@@ -204,48 +256,17 @@ if (!tblHourlySales) return;
       trFooter.appendChild(tdFooter);
     }
 
-    tblHourlySales.appendChild(SeattleStore.renderByHour());
-    tblHourlySales.appendChild(TokioStore.renderByHour());
-    tblHourlySales.appendChild(DubaiStore.renderByHour());
-    tblHourlySales.appendChild(ParisStore.renderByHour());
-    tblHourlySales.appendChild(LimaStore.renderByHour());
+    // create a row for each store. The stores are stored in MainOffice.storesObjectsArray
+    for (var i=0; i < corporate.storesObjectsArray.length ; i++)
+    {
+      //console.log(corporate.storesObjectsArray[i].location);
+      tblHourlySales.appendChild(corporate.storesObjectsArray[i].getStoreRenderRowByHour());
+    }
 
     tblHourlySales.appendChild(trFooter);
-
 } // displayHourlyTable
 
-// display table headers
-// display store info by hour
-// display hourly totals
 
-function displayStoresLocations(store)
-{
-  var ulElement = document.getElementById("ulStoreList");
-
-  var liElement = document.createElement('li');
-  liElement.textContent = store.location;
-  ulElement.appendChild(liElement);
-
-  var nestedUl = document.createElement('ul');
-  ulElement.appendChild(nestedUl);
-
-  var nestedLi = document.createElement('li');
-  nestedLi.textContent= store.address;
-  nestedUl.appendChild(nestedLi);
-
-  nestedLi = document.createElement('li');
-  nestedLi.textContent= store.openHours;
-  nestedUl.appendChild(nestedLi);
-
-  nestedLi = document.createElement('li');
-  nestedLi.textContent= store.contact;
-  nestedUl.appendChild(nestedLi);
-
-  nestedLi = document.createElement('li');
-  nestedLi.textContent= store.additionalInfo;
-  nestedUl.appendChild(nestedLi);
-
-}
 
 
 
@@ -338,3 +359,52 @@ function displayStoresLocations(store)
 
 
 // } // displayStoreInfo
+
+///////////////////////////
+//// M A I N
+//// CREATE corporate OBJECTS
+///////////////////////////
+
+var corporate = new MainOffice();
+displayStoresLocations();
+
+
+
+///////////////////////////
+//// EVENT HANDLER
+///////////////////////////
+
+function createStore(event)
+{
+  var location, address, openHours, contact, additionalInfo, 
+       minDailyCustomer, maxDailyCustomer, avgCookieSale;
+
+    location = event.target.location.value;
+    address = event.target.address.value;
+    openHours = event.target.openHours.value;
+    contact = event.target.contact.value;
+    additionalInfo = event.target.additionalInfo.value;
+    minDailyCustomer = event.target.minDailyCustomer.value;
+    maxDailyCustomer = event.target.maxDailyCustomer.value;
+    avgCookieSale = event.target.avgCookieSale.value;
+
+
+  corporate.addStore(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,0,0,address,openHours,contact,additionalInfo);
+
+  event.preventDefault();
+
+} // function createStore
+
+var form = document.getElementById('formStore') || null;
+if (form) 
+{
+  form.addEventListener("submit",createStore);
+}
+
+
+
+/*
+var tblHourlySales = document.getElementById('tblGlobalHourlySales') || null;
+
+if (!tblHourlySales) return;
+*/ 
