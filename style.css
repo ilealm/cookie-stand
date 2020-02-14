@@ -30,6 +30,7 @@ button{
   border-radius: 20px;
   font-size: 20px;
   color:coral;
+  margin-bottom: 30px;
 }
 
 button:hover {
@@ -102,5 +103,6 @@ aside{
 
 
 footer{
-background-color: steelblue;
+  background-color: coral;
+  height: 50px;
 }
