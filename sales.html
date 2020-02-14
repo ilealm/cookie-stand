@@ -1,89 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- https://www.w3schools.com/html/html_layout.asp -->
+  <link rel="stylesheet" href="style.css"></link>
+  <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap" rel="stylesheet">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pat's Salmon Cookies</title>
-  <link rel="stylesheet" src="style.css"></link>
+  <title>Salmon cookies</title>
 </head>
 <body>
+ <header>
+    <img id="logo" src="images/fish.jpg">
+    <div id="salmonTitle">Salmon Cookies</div>
+ </header>
+ <nav id="navSalmonCookies">
+  <a href="index.html">Home</a>
+</nav>
+<br> <br>
+<body>
+  <form id="formStore">
+  <h3>Add Store</h3>
+    <fieldset>
+      <legend>Store location information</legend>
+    
+      <table id="tblStoreLocation">
+        <tr>
+          <td>Location</td>
+          <td> 
+            <input name="location" type="text" required>
+          </td>
+        </tr>
+        <tr>
+          <td> Address</td>
+          <td> 
+            <input name="address" type="text" required>
+          </td>
+        </tr>
+        <tr>
+          <td> Open Hours</td>
+          <td> 
+            <input name="openHours" type="text" value="06 am - 07:00 pm" required>
+          </td>
+        </tr>
+        <tr>
+          <td> Contact</td>
+          <td> 
+            <input name="contact" type="text" required>
+          </td>
+        </tr>
+        <tr>
+          <td>Additional Info </td>
+          <td> 
+            <input name="additionalInfo" type="text" required>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    <br><br>
+    <fieldset>
+      <legend>Average Daily Sales</legend>
+      <table  id="tblStoreAverage">
+        <tr>
+          <td> Minimum daily customers </td>
+          <td> 
+            <input name="minDailyCustomer" type="number" required>
+          </td>
+        </tr>
+        <tr>
+          <td> Maximum daily customers </td>
+          <td> 
+            <input name="maxDailyCustomer" type="number"  required>
+          </td>
+        </tr>
+        <tr>
+          <td> Average cookie sales </td>
+          <td> 
+            <input name="avgCookieSale" type="text"  required>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    <br><br>
+    <div class="divButton">
+      <button type="submit" id="btnSubbmit">Create store!</button>
+    </div>
+  </form>
   <table id="tblGlobalHourlySales" border="1"></table>
-
-  <!-- <h1 id="globalInfo"> Global infomation</h1>
-
-  <table id="tblGlobalInfo" border="1"> 
-    <tr>
-      <th>globalDailyCookiesSold</th>
-      <th>globalDailyClients</th>
-    </tr>
-  </table>
-  <hr>
-  <h2> Stores information</h2>
-  <table id="tblStoreInfo" border="1"> 
-    <tr>
-      <th>Location</th>
-      <th>min Customers</th>
-      <th>max Customers</th>
-      <th>Avg cookie sale</th>
-      <th>Sold cookies today</th>
-      <th>Num Customer today</th>
-    </tr>
-  </table>
-  <br>
-  <table id="tblStoreSeattle" border="1"> 
-    <tr>
-        <td colspan="3" id="headerStore">Seattle</td> 
-    </tr>
-    <tr>
-      <th>Hour</th>
-      <th>cookies sald per hour</th>
-      <th>customers per hour</th>
-    </tr>
-  </table>
-  <br>
-  <table id="tblStoreTokio" border="1"> 
-    <tr>
-        <td colspan="3">Tokyo</td> 
-    </tr>
-    <tr>
-      <th>Hour</th>
-      <th>cookies sald per hour</th>
-      <th>customers per hour</th>
-    </tr>
-  </table>
-  <br>
-  <table id="tblStoreDubai" border="1"> 
-    <tr>
-        <td colspan="3">Dubai</td> 
-    </tr>
-    <tr>
-      <th>Hour</th>
-      <th>cookies sald per hour</th>
-      <th>customers per hour</th>
-    </tr>
-  </table>
-  <br>
-  <table id="tblStoreParis" border="1"> 
-    <tr>
-        <td colspan="3">Paris</td> 
-    </tr>
-    <tr>
-      <th>Hour</th>
-      <th>cookies sald per hour</th>
-      <th>customers per hour</th>
-    </tr>
-  </table>
-  <br>
-  <table id="tblStoreLima" border="1"> 
-    <tr>
-        <td colspan="3">Lima</td> 
-    </tr>
-    <tr>
-      <th>Hour</th>
-      <th>cookies sald per hour</th>
-      <th>customers per hour</th>
-    </tr>
-  </table> -->
-  <script src="app.js"></script>
+</body>
+<footer> 
+  <label>@ IL Development</label>
+</footer>
+ <script src="app.js"></script>
 </body>
 </html>
