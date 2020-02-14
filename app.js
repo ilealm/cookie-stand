@@ -30,16 +30,13 @@ MainOffice.prototype.addStore = function(location,minDailyCustomer,
   this.storesObjectsArray.push(newStore);
   createFakeSales(newStore);
   displayHourlyTable();
-
-  // Create fake sales for the new store
-
 } // MainOffice.prototype.addStore
 
 
 
 MainOffice.prototype.addSale = function(store, cookiesSold, numClients,hourSale)
 {
-  // update globals
+  // update globals sales and customers
   this.globalDailyCookiesSold = this.globalDailyCookiesSold + cookiesSold;
   this.globalDailyClients = this.globalDailyClients + numClients;
 
@@ -57,7 +54,6 @@ MainOffice.prototype.addSale = function(store, cookiesSold, numClients,hourSale)
   {
     if (this.globalHourlySales[i][0] === hourSale)  // i found the correct hour of the sale, Update the amount of globalHourlySales
     {
-      // console.log('cookiesSold ' + cookiesSold);
       this.globalHourlySales[i][1] = this.globalHourlySales[i][1] + cookiesSold; 
     }
   }
@@ -123,51 +119,50 @@ function createFakeSales(store)
   for (var i=6; i<20;i++) //i know there are 13 working hours now en each store
   {
     store.addSale(i);
-
   } //for (var i=6; i<20;i++)
 }  // function createFakeSales(store)
 
 
-///////////////////////////
-//// DISPLAYING INFO
-///////////////////////////
 
-function displayStoresLocations(store)
+// this function is for index.html
+//function displayStoresLocations(store)
+function displayStoresLocations()
 {
-  // original, remove: var ulElement = document.getElementById("ulStoreList");
-
-  var ulElement = document.getElementById("ulStoreList") || null;;
+ var ulElement = document.getElementById("ulStoreList") || null;;
 
   /* if the main page is not index.html, this process should not be executed because
     this ulStoreList does not exist  
   */
   if (!ulElement) return; 
+  if (corporate = null) return;
 
+  for (var i=0; i < corporate.storesObjectsArray.length ; i++)
+  {
+    var liElement = document.createElement('li');
+    liElement.textContent = corporate.storesObjectsArray[i].location;
+    ulElement.appendChild(liElement);
+  
+    var nestedUl = document.createElement('ul');
+    ulElement.appendChild(nestedUl);
+  
+    var nestedLi = document.createElement('li');
+    nestedLi.textContent= corporate.storesObjectsArray[i].address;
+    nestedUl.appendChild(nestedLi);
+  
+    nestedLi = document.createElement('li');
+    nestedLi.textContent= corporate.storesObjectsArray[i].openHours;
+    nestedUl.appendChild(nestedLi);
+  
+    nestedLi = document.createElement('li');
+    nestedLi.textContent= corporate.storesObjectsArray[i].contact;
+    nestedUl.appendChild(nestedLi);
+  
+    nestedLi = document.createElement('li');
+    nestedLi.textContent= corporate.storesObjectsArray[i].additionalInfo;
+    nestedUl.appendChild(nestedLi);
 
-  var liElement = document.createElement('li');
-  liElement.textContent = store.location;
-  ulElement.appendChild(liElement);
-
-  var nestedUl = document.createElement('ul');
-  ulElement.appendChild(nestedUl);
-
-  var nestedLi = document.createElement('li');
-  nestedLi.textContent= store.address;
-  nestedUl.appendChild(nestedLi);
-
-  nestedLi = document.createElement('li');
-  nestedLi.textContent= store.openHours;
-  nestedUl.appendChild(nestedLi);
-
-  nestedLi = document.createElement('li');
-  nestedLi.textContent= store.contact;
-  nestedUl.appendChild(nestedLi);
-
-  nestedLi = document.createElement('li');
-  nestedLi.textContent= store.additionalInfo;
-  nestedUl.appendChild(nestedLi);
-
-}
+  }
+} // function displayStoresLocations
 
 function fortatTo12Hrs(hourToFormat) 
 {
@@ -215,13 +210,21 @@ var generateRandomNumber = {
    }
 } //genRandomNumber
 
-
+/*
+This function creates the table to display the hourly sales by stores. It the table exist, all nodes are eliminated and
+appended the new ones.
+*/ 
 function displayHourlyTable()
 {
 var tblHourlySales = document.getElementById('tblGlobalHourlySales') || null;
 
 if (!tblHourlySales) return;
 
+
+  // update the title
+  var h3Title = document.getElementById('h3GlobalHourlySales');
+  h3Title.textContent = 'Global Sales by Hour';
+  
   // delete all table nodes, so we can genereate the new table
   var child = tblHourlySales.lastChild;
   while (child)
@@ -260,14 +263,7 @@ if (!tblHourlySales) return;
       tblHourlySales.appendChild(corporate.storesObjectsArray[i].getStoreRenderRowByHour());
     }
 
-    // tblHourlySales.appendChild(SeattleStore.getStoreRenderRowByHour());
-    // tblHourlySales.appendChild(TokioStore.getStoreRenderRowByHour());
-    // tblHourlySales.appendChild(DubaiStore.getStoreRenderRowByHour());
-    // tblHourlySales.appendChild(ParisStore.getStoreRenderRowByHour());
-    // tblHourlySales.appendChild(LimaStore.getStoreRenderRowByHour());
-
     tblHourlySales.appendChild(trFooter);
-
 } // displayHourlyTable
 
 
@@ -370,45 +366,7 @@ if (!tblHourlySales) return;
 ///////////////////////////
 
 var corporate = new MainOffice();
-
-// var SeattleStore = new Store('Seattle',23,65,6.3,0,0,'2543 4th ave, Seattle, WA, US.','06 am - 07:00 pm', 'Susan May','14th February Special SALE');
-// var TokioStore = new Store('Tokio',3,24,1.2,0,0,'4hao Lou 106shi', '06 am - 07:00 pm','Liao Shuren','Special 2x1');
-// var DubaiStore = new Store('Dubai',11,38,3.7,0,0,'P.O.Box 8, No 821, Gr Fl','06 am - 07:00 pm', 'Alenna Grusp','Join us! We are hiring.');
-// var ParisStore = new Store('Paris',20,38,2.3,0,0,'60 rue du Fossé des Tanneurs','06 am - 07:00 pm','Alex Asselin', 'Try our new seasonal flavor');
-// var LimaStore = new Store('Lima',2,16,4.6,0,0,'Cantuarias 226 Tda 62 - Miraflores','06 am - 07:00 pm', 'Spe∫cial sale event this weekend.');
-
-///////////////////////////
-//// / CREATE FAKE SALES FOR EACH STORE. Just to hardcode the for of each hour
-///////////////////////////
-/*
-un comment this
-for (var i=6; i<20;i++) //i know there are 13 working hours now en each store
-{
-  SeattleStore.addSale(i);
-  TokioStore.addSale(i);
-  DubaiStore.addSale(i);
-  ParisStore.addSale(i);
-  LimaStore.addSale(i);
-} //for (var i=6; i<20;i++)
-
-*/
-
-
-///////////////////////////
-//// DONT DELETE THIS!!
-///////////////////////////
-
-/*
-un comment this 
-displayHourlyTable();
-displayStoresLocations(SeattleStore);
-displayStoresLocations(TokioStore);
-displayStoresLocations(DubaiStore);
-displayStoresLocations(ParisStore);
-displayStoresLocations(LimaStore);
-
-*/
-
+displayStoresLocations();
 
 
 

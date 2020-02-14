@@ -34,6 +34,7 @@ button{
   font-size: 20px;
   color:coral;
   margin-bottom: 30px;
+  
 }
 
 button:hover {
@@ -90,19 +91,27 @@ aside{
 }
   
 
-
-
-
-
-
 .liStoreDetails{
   
 }
 
+th{
+  color: coral;
+}
+
+#tblGlobalHourlySales{
+  text-align: center;
+  empty-cells: hide;
+}
 
 
 
+#tblGlobalHourlySales tr:nth-child(even) {
+  background: #CCC
+}
 
+#tblGlobalHourlySales tr:nth-child(odd) {
+  background: #FFF}
 
 
 footer{
