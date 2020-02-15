@@ -7,17 +7,19 @@
 function MainOffice()
 {
   this.name = 'Salmon Cookies';
-  // array pos0=storeName | pos1=dailyCookiesSold | pos2:da¡ilyCustomers
-  //this.stores = [['Seattle',0,0],['Tokio',0,0],['dubai',0,0],['paris',0,0],['lima',0,0]];
+  // stores: pos0=storeName | pos1=dailyCookiesSold | pos2:da¡ilyCustomers
   this.stores = [];
-  // array with storeOBJECTS. I create a new one so I don't have tp change the parameter this.stores
+  // storeOBJECTS: 0:storeObject (I create a new one so I don't have tp change the parameter this.stores)
   this.storesObjectsArray = [];
   this.globalDailyCookiesSold = 0;
   this.globalDailyClients = 0;
-  // 0:hour | 1:globalCookiesSales
+  // globalHourlySales: 0:hour | 1:globalCookiesSales (all stores sales, at that hour)
   this.globalHourlySales=[[6,0],[7,0],[8,0],[9,0],[10,0],[11,0],[12,0],[13,0],[14,0],[15,0],[16,0],[17,0],[18,0],[19,0]];
 }  //funtion corporate
 
+/*
+This method create a new store and push it in storesObjectsArray, so now we have an array with all the stores.
+*/
 MainOffice.prototype.addStore = function(location,minDailyCustomer,
     maxDailyCustomer,avgCookieSale,soldCookiesPerDay,dailyNumCustomers,
     address, openHours, contact, additionalInfo)
@@ -33,23 +35,27 @@ MainOffice.prototype.addStore = function(location,minDailyCustomer,
 } // MainOffice.prototype.addStore
 
 
-
+/*
+This method updates the global sold cookies(globalDailyCookiesSold) and customers(globalDailyClients).
+It only updates totals in MainOffice 
+*/
 MainOffice.prototype.addSale = function(store, cookiesSold, numClients,hourSale)
 {
   // update globals sales and customers
   this.globalDailyCookiesSold = this.globalDailyCookiesSold + cookiesSold;
   this.globalDailyClients = this.globalDailyClients + numClients;
 
-  // update store daily Totals
+  // update STORE daily Totals, cookiesSold and numClients
   for (var i=0; i<this.stores.length;i++)
   {
-    if (this.stores[i][0].toLowerCase() == store.toLowerCase())   // found the store
+    if (this.stores[i][0].toLowerCase() == store.toLowerCase())   // found the store who made the sale
     { 
       this.stores[i][1] = this.stores[i][1] + cookiesSold;    // pos1=dailyCookiesSold
       this.stores[i][2] = this.stores[i][2] + numClients;     // pos2:dailyCustomers
     }
   }
-  // update the value of globalHourlySales[1] where the  hour[0] is the indicated
+  // update the value of globalHourlySales[1] where the  hour[0] is the indicated from the sale
+  // i did this way so we can enter sales in any hour
   for (var i=0; i<this.globalHourlySales.length;i++)
   {
     if (this.globalHourlySales[i][0] === hourSale)  // i found the correct hour of the sale, Update the amount of globalHourlySales
@@ -60,7 +66,9 @@ MainOffice.prototype.addSale = function(store, cookiesSold, numClients,hourSale)
 }  // MainOffice.prototype.addSale
 
 
-
+/*
+This function creates a new store object
+*/
 function Store(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,
           soldCookiesPerDay,dailyNumCustomers,address, openHours, contact, additionalInfo)
 { 
@@ -78,24 +86,33 @@ function Store(location,minDailyCustomer,maxDailyCustomer,avgCookieSale,
   this.hourlySales=[[6,0,0],[7,0,0],[8,0,0],[9,0,0],[10,0,0],[11,0,0],[12,0,0],[13,0,0],[14,0,0],[15,0,0],[16,0,0],[17,0,0],[18,0,0],[19,0,0]];
 } // CONSTRUCTOR function Store
 
+/*
+This method creates a ramndom amount of cookie sale.  
+Then update the store totals at one given hour in the ARRAY 
+hourlySales: 0 = hour; | 1 =cookies sold per hour | 2= customers per hour
+Then update the STORES TOTALS in the variables soldCookiesPerDay and dailyNumCustomers
+Then call MainOffice.addSale to update global sales and customer per day
+*/
 Store.prototype.addSale = function(hourSale)
   {
     var numClients, numCookies, totalNumCookiesPerSale, randomNumber;
 
-    randomNumber = generateRandomNumber;   
-    // obtain the random amounts of clients and cookies sold.
-    randomNumber.minValue=this.minDailyCustomer;
-    randomNumber.maxValue=this.maxDailyCustomer;
-    numClients=randomNumber.getNumber();
+    // Obtain the random cookie sale
+      randomNumber = generateRandomNumber;   
+      // obtain the random amounts of clients and cookies sold.
+      randomNumber.minValue=this.minDailyCustomer;
+      randomNumber.maxValue=this.maxDailyCustomer;
+      numClients=randomNumber.getNumber();
 
-    // obtain the amount of cookies sold per customer
-    randomNumber.minValue=1;
-    randomNumber.maxValue=this.avgCookieSale;
-    numCookies=randomNumber.getNumber(); 
+      // obtain the amount of cookies sold per customer
+      randomNumber.minValue=1;
+      randomNumber.maxValue=this.avgCookieSale;
+      numCookies=randomNumber.getNumber(); 
+    
+      // multiply the ramdom amount of cookies, for the random amount of customers, to know the real amount of sold cookies
+      totalNumCookiesPerSale = numClients * numCookies;
    
-    // multiply the ramdom amount of cookies, for the random amount of customers, to know the real amount of sold cookies
-    totalNumCookiesPerSale = numClients * numCookies;
-   
+    // Upodate hours hourlySales totals  
     // update the value of hourlySales[column1] where the  hours is the indicated
     for (var i=0; i<this.hourlySales.length;i++)
     {
@@ -104,7 +121,7 @@ Store.prototype.addSale = function(hourSale)
         this.hourlySales[i][1] = this.hourlySales[i][1] + totalNumCookiesPerSale; 
         this.hourlySales[i][2] = this.hourlySales[i][2] + numClients; 
       }
-    }
+    } 
     // add the sales and customers, to the global STORE sales
    this.soldCookiesPerDay = this.soldCookiesPerDay + totalNumCookiesPerSale;  //numCookies;
    this.dailyNumCustomers = this.dailyNumCustomers + numClients;
@@ -112,7 +129,9 @@ Store.prototype.addSale = function(hourSale)
    corporate.addSale(this.location,totalNumCookiesPerSale,numClients,hourSale);
   } //Store.prototype.addSale
 
-
+/*
+This function creates fakes sales for a given store object, for 13 hours
+*/
 function createFakeSales(store)
 {
   //TODO change this to accept any hours range
@@ -124,8 +143,10 @@ function createFakeSales(store)
 
 
 
-// this function is for index.html
-//function displayStoresLocations(store)
+/* 
+This function is for index.html, and displays in a list the information of all
+ stores in corporate.storesObjectsArray
+*/
 function displayStoresLocations()
 {
  var ulElement = document.getElementById("ulStoreList") || null;;
@@ -134,7 +155,26 @@ function displayStoresLocations()
     this ulStoreList does not exist  
   */
   if (!ulElement) return; 
-  if (corporate = null) return;
+ // if (corporate = null) return;
+ 
+
+
+  /*
+  If the page is loaded from index.htmil, the store objects doesn't exist yet. 
+  For now (until I can storage them in storage memory) I will create the store objects here so them
+  can be rendered in the page. This creation shoul be removed.
+  */
+  // Start to be removed when I can obtain info from local storage
+  var corporate = new MainOffice(); //in this case, I create corporate here. Remove this
+  var SeattleStore = corporate.addStore('Seattle',23,65,6.3,0,0,'2543 4th ave, Seattle, WA, US.','06 am - 07:00 pm', 'Susan May','14th February Special SALE');
+  var TokioStore = corporate.addStore('Tokio',3,24,1.2,0,0,'4hao Lou 106shi', '06 am - 07:00 pm','Liao Shuren','Special 2x1');
+  var DubaiStore = corporate.addStore('Dubai',11,38,3.7,0,0,'P.O.Box 8, No 821, Gr Fl','06 am - 07:00 pm', 'Alenna Grusp','Join us! We are hiring.');
+  var ParisStore = corporate.addStore('Paris',20,38,2.3,0,0,'60 rue du Fossé des Tanneurs','06 am - 07:00 pm','Alex Asselin', 'Try our new seasonal flavor');
+  var LimaStore = corporate.addStore('Lima',2,16,4.6,0,0,'Cantuarias 226 Tda 62 - Miraflores','06 am - 07:00 pm', 'Spe∫cial sale event this weekend.');
+// finish to be removed
+
+
+  // TODO obtain from local storage the store objects
 
   for (var i=0; i < corporate.storesObjectsArray.length ; i++)
   {
@@ -164,6 +204,9 @@ function displayStoresLocations()
   }
 } // function displayStoresLocations
 
+/*
+This function format from militar time to 06:00 am or 06:00 pm
+*/
 function fortatTo12Hrs(hourToFormat) 
 {
   var formatedHour;
@@ -182,6 +225,10 @@ function fortatTo12Hrs(hourToFormat)
   return formatedHour;
 } // function fortatTo12Hrs
 
+/*
+This method retun a <tr>, where <td> are the object's sales
+at each our
+*/
 Store.prototype.getStoreRenderRowByHour = function()
   {
     var tdElement, trElement;
@@ -194,7 +241,7 @@ Store.prototype.getStoreRenderRowByHour = function()
     for (var i=0; i<this.hourlySales.length;i++)
     { 
       tdElement = document.createElement('td');
-      tdElement.textContent = this.hourlySales[i][1];  //TODO convert to 12h format
+      tdElement.textContent = this.hourlySales[i][1]; 
       trElement.appendChild(tdElement);
     }
     return(trElement);
@@ -210,16 +257,16 @@ var generateRandomNumber = {
    }
 } //genRandomNumber
 
+
 /*
-This function creates the table to display the hourly sales by stores. It the table exist, all nodes are eliminated and
-appended the new ones.
+This function creates the table to display the hourly sales by stores. It the table exist, 
+all nodes are eliminated and appended the new ones.
 */ 
 function displayHourlyTable()
 {
 var tblHourlySales = document.getElementById('tblGlobalHourlySales') || null;
 
 if (!tblHourlySales) return;
-
 
   // update the title
   var h3Title = document.getElementById('h3GlobalHourlySales');
@@ -366,7 +413,7 @@ if (!tblHourlySales) return;
 ///////////////////////////
 
 var corporate = new MainOffice();
-displayStoresLocations();
+displayStoresLocations(); 
 
 
 
@@ -399,12 +446,4 @@ var form = document.getElementById('formStore') || null;
 if (form) 
 {
   form.addEventListener("submit",createStore);
-}
-
-
-
-/*
-var tblHourlySales = document.getElementById('tblGlobalHourlySales') || null;
-
-if (!tblHourlySales) return;
-*/ 
+}ß
