@@ -155,11 +155,11 @@ function displayStoresLocations() {
   */
   // Start to be removed when I can obtain info from local storage
   var corporate = new MainOffice(); //in this case, I create corporate here. Remove this
-  var SeattleStore = corporate.addStore('Seattle', 23, 65, 6.3, 0, 0, '2543 4th ave, Seattle, WA, US.', '06 am - 07:00 pm', 'Susan May', '14th February Special SALE');
-  var TokioStore = corporate.addStore('Tokio', 3, 24, 1.2, 0, 0, '4hao Lou 106shi', '06 am - 07:00 pm', 'Liao Shuren', 'Special 2x1');
-  var DubaiStore = corporate.addStore('Dubai', 11, 38, 3.7, 0, 0, 'P.O.Box 8, No 821, Gr Fl', '06 am - 07:00 pm', 'Alenna Grusp', 'Join us! We are hiring.');
-  var ParisStore = corporate.addStore('Paris', 20, 38, 2.3, 0, 0, '60 rue du Fossé des Tanneurs', '06 am - 07:00 pm', 'Alex Asselin', 'Try our new seasonal flavor');
-  var LimaStore = corporate.addStore('Lima', 2, 16, 4.6, 0, 0, 'Cantuarias 226 Tda 62 - Miraflores', '06 am - 07:00 pm', 'Spe∫cial sale event this weekend.');
+  corporate.addStore('Seattle', 23, 65, 6.3, 0, 0, '2543 4th ave, Seattle, WA, US.', '06 am - 07:00 pm', 'Susan May', '14th February Special SALE');
+  corporate.addStore('Tokio', 3, 24, 1.2, 0, 0, '4hao Lou 106shi', '06 am - 07:00 pm', 'Liao Shuren', 'Special 2x1');
+  corporate.addStore('Dubai', 11, 38, 3.7, 0, 0, 'P.O.Box 8, No 821, Gr Fl', '06 am - 07:00 pm', 'Alenna Grusp', 'Join us! We are hiring.');
+  corporate.addStore('Paris', 20, 38, 2.3, 0, 0, '60 rue du Fossé des Tanneurs', '06 am - 07:00 pm', 'Alex Asselin', 'Try our new seasonal flavor');
+  corporate.addStore('Lima', 2, 16, 4.6, 0, 0, 'Cantuarias 226 Tda 62 - Miraflores', '06 am - 07:00 pm', 'Spe∫cial sale event this weekend.');
   // finish to be removed
 
 
@@ -168,6 +168,7 @@ function displayStoresLocations() {
   for (var i = 0; i < corporate.storesObjectsArray.length; i++) {
     var liElement = document.createElement('li');
     liElement.textContent = corporate.storesObjectsArray[i].location;
+    liElement.className = 'storeName';
     ulElement.appendChild(liElement);
 
     var nestedUl = document.createElement('ul');
@@ -175,18 +176,22 @@ function displayStoresLocations() {
 
     var nestedLi = document.createElement('li');
     nestedLi.textContent = corporate.storesObjectsArray[i].address;
+    nestedLi.className='liStoreDetails';
     nestedUl.appendChild(nestedLi);
 
     nestedLi = document.createElement('li');
     nestedLi.textContent = corporate.storesObjectsArray[i].openHours;
+    nestedLi.className='liStoreDetails';
     nestedUl.appendChild(nestedLi);
 
     nestedLi = document.createElement('li');
     nestedLi.textContent = corporate.storesObjectsArray[i].contact;
+    nestedLi.className='liStoreDetails';
     nestedUl.appendChild(nestedLi);
 
     nestedLi = document.createElement('li');
     nestedLi.textContent = corporate.storesObjectsArray[i].additionalInfo;
+    nestedLi.className='liStoreDetails';
     nestedUl.appendChild(nestedLi);
 
   }
@@ -279,6 +284,8 @@ function displayHourlyTable() {
     //CREATE FOOTER
     tdFooter = document.createElement('td');
     tdFooter.textContent = corporate.globalHourlySales[i][1]; // // 0:hour | 1:globalCookiesSales
+    // tdTotals test
+    tdFooter.className='tdTotals';
     trFooter.appendChild(tdFooter);
   }
 
